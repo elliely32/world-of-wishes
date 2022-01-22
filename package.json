@@ -1,7 +1,7 @@
 {
-  "name": "fs-app-template",
+  "name": "world_of_wishes",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "A site dedicating to capturing the hearts, desires and wishes of people far and wide.",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
@@ -12,6 +12,7 @@
     "start:dev:logger": "LOGGING=true npm run start:dev",
     "start:dev:seed": "SEED=true npm run start:dev",
     "start-server": "JWT=shh nodemon server -e html,js,scss --ignore public --ignore client",
+    "start-server:windows": "set JWT=shh && nodemon server -e html,js,scss --ignore public --ignore client",
     "test": "NODE_ENV=test JWT=a_secret mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" --require @babel/register --require esm ",
     "test:dev": "npm run test -- --watch",
     "test:dev:models": "npm run test:dev -- --grep=model",
@@ -20,8 +21,9 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.8",
     "axios": "^0.21.1",
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
     "compression": "^1.7.3",
     "express": "^4.16.4",
     "history": "^4.9.0",
