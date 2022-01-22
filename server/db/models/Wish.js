@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const axios = require('axios');
 
 const Wish = db.define('wish',{
     wishMessage: {
@@ -8,9 +7,15 @@ const Wish = db.define('wish',{
         allowNull: false
     },
     approved:{
-        type:Sequelize.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         defaultValue: false
+    },
+    coordinateX:{
+        type: Sequelize.INTEGER
+    },
+    coordinateY:{
+        type: Sequelize.INTEGER
     }
 })
 
-module.exports = User
+module.exports = Wish

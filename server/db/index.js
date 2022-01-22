@@ -3,7 +3,7 @@
 const db = require('./db')
 
 const User = require('./models/User')
-const Wish = require('./model/Wish')
+const Wish = require('./models/Wish')
 
 //associations could go here!
 User.hasMany(Wish);
