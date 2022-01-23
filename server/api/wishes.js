@@ -28,6 +28,15 @@ router.post('/', async (req, res, next) => {
 	}
 });
 
+router.get('/:wishId', async (req, res, next) => {
+	try {
+		const wish = await Wish.findByPk(req.params.wishId);
+		res.json(wish);
+	} catch (err) {
+		next(err);
+	}
+});
+
 router.put('/:wishId', requireToken, isAdmin, async (req, res, next) => {
 	try {
 		const wish = await Wish.findByPk(req.params.wishId);

@@ -1,29 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ReactP5Wrapper } from 'react-p5-wrapper';
 import * as homeSketch from './sketches/homeSketch';
+import { fetchApprovedWishes } from '../store';
 
 /**
  * COMPONENT
  */
-export const Home = (props) => {
-	const { username } = props;
-
-	return (
-		<div>
-			<ReactP5Wrapper sketch={homeSketch.sketch} />
-			<h1>wishes</h1>
-		</div>
-	);
-};
+class Home extends Component {
+	componentDidMount() {
+		this.props.fetchApprovedWishes();
+	}
+	render() {
+		const wishes = this.props.wishes;
+		return (
+			<div>
+				<ReactP5Wrapper sketch={homeSketch.sketch} />
+				<h1>wishes</h1>
+				{wishes.map((wish) => (
+					<div key={wish.id}>
+						<p>{wish.wishMessage}</p>
+					</div>
+				))}
+			</div>
+		);
+	}
+}
 
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-	return {
-		username: state.auth.username,
-	};
-};
+const mapState = (state) => ({
+	wishes: state.wishes,
+});
 
-export default connect(mapState)(Home);
+const mapDispatch = (dispatch) => ({
+	fetchApprovedWishes: () => dispatch(fetchApprovedWishes()),
+});
+
+export default connect(mapState, mapDispatch)(Home);
