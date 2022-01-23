@@ -30,27 +30,21 @@ const wishes = [
 	{
 		wishMessage: 'I hope I pass my MCAT',
 		approved: true,
-		coordinateX: 300,
-		coordinateY: 400,
 	},
 	{
 		wishMessage: 'I want a pay raise',
 		approved: true,
-		coordinateX: 500,
-		coordinateY: 700,
 	},
 	{
 		wishMessage: 'I wish I could go to my homeland again',
-		coordinateX: 670,
-		coordinateY: 409,
 	},
 	{
 		wishMessage: 'I want to reach immortals in Valorant',
 		approved: true,
-		coordinateX: 470,
-		coordinateY: 918,
 	},
-	{ wishMessage: 'I want to get c6 Ganyu', coordinateX: 718, coordinateY: 646 },
+	{
+		wishMessage: 'I want to get c6 Ganyu',
+	},
 ];
 async function seed() {
 	await db.sync({ force: true }); // clears db and matches models to tables
