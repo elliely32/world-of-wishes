@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import HomeSketch from './sketches/HomeSketch';
 import WishSketch from './sketches/wishSketch';
 import { fetchApprovedWishes } from '../store';
 
@@ -13,16 +12,10 @@ class Home extends Component {
 	}
 	render() {
 		const wishes = this.props.wishes;
+		console.log(this.props);
 		return (
 			<div>
-				{/* <HomeSketch /> */}
-				<h1>wishes</h1>
-				{/* {wishes.map((wish) => (
-					<div key={wish.id}>
-						
-					</div>
-				))} */}
-				<WishSketch wishes={wishes} history={this.history} />
+				<WishSketch wishes={wishes} history={this.props.history} />
 			</div>
 		);
 	}

@@ -11,12 +11,6 @@ class UnapprovedWishes extends Component {
 		this.props.fetchUnapprovedWishes();
 	}
 
-	// componentDidUpdate(prevProps) {
-	// 	if (this.props.wishId !== prevProps.wishId) {
-	// 		this.props.fetchUnapprovedWishes();
-	// 	}
-	// }
-
 	render() {
 		const wishes = this.props.wishes;
 		return (

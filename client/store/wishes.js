@@ -41,7 +41,6 @@ export const _deleteWish = (wish) => ({
 export const fetchSingleWish = (wishId) => {
 	return async (dispatch) => {
 		try {
-			console.log('wish Thunk');
 			const { data: wish } = await axios.get(`/api/wishes/${wishId}`);
 			dispatch(setSingleWish(wish));
 		} catch (err) {

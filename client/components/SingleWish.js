@@ -1,27 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchSingleWish } from '../store';
+import { fetchSingleWish } from '../store/wishes';
 
 class SingleWish extends Component {
 	componentDidMount() {
-		const wishId = this.props.match.params.id;
+		console.log('hello');
+		const wishId = this.props.match.params.wishId;
 		this.props.fetchSingleWish(wishId);
 	}
 
 	render() {
-		const { wish } = this.props || {};
+		const wish = this.props.wish;
 		console.log('props in singlewish component: ', this.props);
 		return (
 			<div className='singleWish'>
-				<p id='wishNumber'>{wish.id}</p>
-				<p id='singleWishMessage'>{wish.wishMessage}</p>
+				<p>{wish.id}</p>
+				<p>{wish.wishMessage}</p>
 			</div>
 		);
 	}
 }
 
 const mapState = (state) => ({
-	wish: state.wish,
+	wish: state.wishes,
 });
 
 const mapDispatch = (dispatch) => ({
