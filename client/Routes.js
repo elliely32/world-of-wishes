@@ -4,6 +4,8 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login } from './components/AuthForm';
 import Home from './components/Home';
 import Unapproved from './components/Unapproved';
+import CreateWish from './components/CreateWish';
+import SingleWish from './components/SingleWish';
 import { me } from './store';
 
 /**
@@ -22,11 +24,15 @@ class Routes extends Component {
 				{isLoggedIn ? (
 					<Switch>
 						<Route exact path='/' component={Home} />
+						<Route exact path='/createWish' component={CreateWish} />
 						<Route exact path='/unapproved' component={Unapproved} />
+						<Route exact path='/wishes/:id' component={SingleWish} />
 					</Switch>
 				) : (
 					<Switch>
 						<Route exact path='/' component={Home} />
+						<Route exact path='/createWish' component={CreateWish} />
+						<Route exact path='/wishes/:id' component={SingleWish} />
 						<Route path='/login' component={Login} />
 					</Switch>
 				)}

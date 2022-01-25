@@ -38,10 +38,11 @@ export const _deleteWish = (wish) => ({
 	wish,
 });
 
-export const fetchSingleWish = (id) => {
+export const fetchSingleWish = (wishId) => {
 	return async (dispatch) => {
 		try {
-			const { data: wish } = await axios.get(`/api/wishes/${id}`);
+			console.log('wish Thunk');
+			const { data: wish } = await axios.get(`/api/wishes/${wishId}`);
 			dispatch(setSingleWish(wish));
 		} catch (err) {
 			console.error(err);
@@ -76,7 +77,16 @@ export const fetchUnapprovedWishes = () => {
 	};
 };
 
-export const createWish = () => {};
+export const createWish = (wish) => {
+	return async (dispatch) => {
+		try {
+			const { data: newWish } = await axios.post('/api/wishes/', wish);
+			dispatch(_createWish(newWish));
+		} catch (err) {
+			console.error(err);
+		}
+	};
+};
 
 export const approveWish = (wishId, history) => {
 	return async (dispatch) => {
@@ -88,7 +98,6 @@ export const approveWish = (wishId, history) => {
 				},
 			});
 			dispatch(_approveWish(approved));
-			history.push('/');
 		} catch (err) {
 			console.error(err);
 		}
@@ -122,7 +131,7 @@ export default function wishesReducer(state = [], action) {
 			return action.wishes;
 		case APPROVE_WISH:
 			return state.map((wish) =>
-				wish.id === action.wish.id ? action.wish : wish
+				wish.id === action.wish.id ? action.wish : { ...wish }
 			);
 		case DELETE_WISH:
 			return state.filter((wish) => wish.id !== action.wish.id);

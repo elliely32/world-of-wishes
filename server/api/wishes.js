@@ -8,7 +8,7 @@ const {
 router.get('/', async (req, res, next) => {
 	try {
 		const wishes = await Wish.findAll({
-			attributes: ['wishMessage'],
+			attributes: ['wishMessage', 'id'],
 			where: {
 				approved: true,
 			},
@@ -28,10 +28,23 @@ router.post('/', async (req, res, next) => {
 	}
 });
 
+router.get('/unapproved', requireToken, isAdmin, async (req, res, next) => {
+	try {
+		const wishes = await Wish.findAll({
+			where: {
+				approved: false,
+			},
+		});
+		res.json(wishes);
+	} catch (err) {
+		next(err);
+	}
+});
+
 router.get('/:wishId', async (req, res, next) => {
 	try {
-		const wish = await Wish.findByPk(req.params.wishId);
-		res.json(wish);
+		const singleWish = await Wish.findByPk(req.params.wishId);
+		res.json(singleWish);
 	} catch (err) {
 		next(err);
 	}
@@ -51,23 +64,10 @@ router.delete('/:wishId', requireToken, isAdmin, async (req, res, next) => {
 		const findWish = await Wish.findByPk(req.params.wishId);
 		if (findWish) {
 			await findWish.destroy();
-			res.send(findWish).sendStatus(204);
+			res.json(findWish).sendStatus(204);
 		} else {
 			res.sendStatus(404);
 		}
-	} catch (err) {
-		next(err);
-	}
-});
-
-router.get('/unapproved', requireToken, isAdmin, async (req, res, next) => {
-	try {
-		const wishes = await Wish.findAll({
-			where: {
-				approved: false,
-			},
-		});
-		res.json(wishes);
 	} catch (err) {
 		next(err);
 	}

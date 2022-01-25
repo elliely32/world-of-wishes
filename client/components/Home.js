@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ReactP5Wrapper } from 'react-p5-wrapper';
-import * as homeSketch from './sketches/homeSketch';
+import HomeSketch from './sketches/HomeSketch';
+import WishSketch from './sketches/wishSketch';
 import { fetchApprovedWishes } from '../store';
 
 /**
@@ -15,13 +15,14 @@ class Home extends Component {
 		const wishes = this.props.wishes;
 		return (
 			<div>
-				<ReactP5Wrapper sketch={homeSketch.sketch} />
+				{/* <HomeSketch /> */}
 				<h1>wishes</h1>
-				{wishes.map((wish) => (
+				{/* {wishes.map((wish) => (
 					<div key={wish.id}>
-						<p>{wish.wishMessage}</p>
+						
 					</div>
-				))}
+				))} */}
+				<WishSketch wishes={wishes} history={this.history} />
 			</div>
 		);
 	}
